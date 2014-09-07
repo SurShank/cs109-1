@@ -14,12 +14,12 @@ Parameters
 ----------
 nsim : int
     The number of simulations to run.
-    
+
 Returns
 -------
 sims : array
     Random array of 0s, 1s, and 2s.
-    
+
 Example
 -------
 >>> print(simulate_prizedoor(3))
@@ -27,7 +27,7 @@ array([0, 0, 2])
 """
 def simulate_prizedoor(nsim):
     return np.random.randint(3, size=nsim)
-    
+
 """
 Function
 --------
@@ -40,12 +40,12 @@ Parameters
 ----------
 nsim : int
     The number of simulations to generate guesses for.
-    
+
 Returns
 -------
 guesses : array
     An array of guesses. Each guess is a 0, 1, or 2.
-    
+
 Example
 -------
 >>> print(simulate_guess(5))
@@ -60,7 +60,7 @@ def simulate_guess(nsim):
             continue
         guesses = np.append(guesses, door)
     return guesses
-    
+
 """
 Function
 --------
@@ -75,13 +75,13 @@ prizedoors : array
     The door that the prize is behind in each simulation.
 guesses : array
     The door that the contestant guessed in each simulation.
-    
+
 Returns
 -------
 goats : array
     The goat door that is opened for each simulation. Each item is 0, 1, or 2, and is different
     from both prizedoors and guesses.
-    
+
 Example
 -------
 >>> print(goat_door(np.array([0, 1, 2]), np.array([1, 1, 1])))
@@ -90,13 +90,13 @@ array([2, 2, 0])
 def goat_door(prizedoors, guesses):
     # Make sure arrays are compatible.
     assert prizedoors.shape == guesses.shape
-    
+
     goats = []
     for doors in zip(prizedoors, guesses):
         goat = set([0, 1, 2]).difference(doors).pop() # Get first element of difference.
         goats.append(goat)
     return np.array(goats)
-    
+
 """
 Function
 --------
@@ -123,13 +123,13 @@ array([2, 0, 0])
 def switch_guess(guesses, goatdoors):
     # Make sure arrays are compatible.
     assert guesses.shape == goatdoors.shape
-    
+
     new_doors = []
     for doors in zip(guesses, goatdoors):
         new_door = set([0, 1, 2]).difference(doors).pop() # Get first element of difference.
         new_doors.append(new_door)
     return np.array(new_doors)
-    
+
 """
 Function
 --------
@@ -157,7 +157,7 @@ Examples
 def win_percentage(guesses, prizedoors):
     # Make sure arrays are compatible.
     assert guesses.shape == prizedoors.shape
-    
+
     return (guesses == prizedoors).sum() / float(len(guesses)) * 100
 
 """
@@ -173,7 +173,7 @@ ngames : int
     Numbers of games to play.
 switch : bool
     Whether or not to use the "switch" strategy.
-    
+
 Returns
 -------
 None
@@ -186,14 +186,14 @@ Examples
 def play_game(ngames, switch=False):
     prize_doors = simulate_prizedoor(ngames)
     selected_doors = simulate_guess(ngames)
-    
+
     if switch:
         goat_doors = goat_door(prize_doors, selected_doors)
         selected_doors = switch_guess(selected_doors, goat_doors)
-        
+
     print('Won {} % of the time with{} switch strategy.'.format(win_percentage(selected_doors, prize_doors),
                                                                 '' if switch else 'out'))
-    
+
 if __name__ == '__main__':
     play_game(10000)
     play_game(10000, True)
