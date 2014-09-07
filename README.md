@@ -1,4 +1,4 @@
 cs109
 =====
 
-HES CSCI E-109 personal repo
+HES CSCI E-109 homework repo
