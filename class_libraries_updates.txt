@@ -4,4 +4,6 @@ conda update anaconda accelerate iopro
 
 conda update ipython numpy scipy pandas matplotlib scikit-learn requests networkx beautiful-soup
 
+conda install -c https://conda.binstar.org/asmeurer mrjob pattern seaborn
+or
 pip install -U mrjob pattern seaborn
