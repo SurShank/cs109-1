@@ -1,6 +1,6 @@
 conda update conda
 
-conda update anaconda accelerate iopro
+conda update anaconda bokeh accelerate iopro
 
 conda update ipython numpy scipy pandas matplotlib scikit-learn requests networkx beautiful-soup
 
